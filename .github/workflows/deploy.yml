@@ -1,0 +1,27 @@
+name: Deploy
+run-name: Decidio ${{ inputs.decidio }}
+on:
+  workflow_dispatch:
+    inputs:
+      decidio:
+        description: Set by Decidio
+        required: true
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - id: decidio
+        uses: OmniTwin/decidio-actions@e40ba8e75a223f2475038d38a16df5a5885afde4 # v1.0.0
+        with:
+          step: verify
+          decision: ${{ inputs.decidio }}
+          api-url: https://mcp.decidioai.com
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          ref: ${{ steps.decidio.outputs.sha }}
+      - name: Deploy
+        run: echo "Deploying ${{ steps.decidio.outputs.sha }} - replace this line with your deploy command"
