@@ -1,0 +1,16 @@
+name: Ask Decidio to deploy
+on:
+  push:
+    branches: [main]
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  ask:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: OmniTwin/decidio-actions@e40ba8e75a223f2475038d38a16df5a5885afde4 # v1.0.0
+        with:
+          step: request
+          environment: production
+          api-url: https://mcp.decidioai.com
