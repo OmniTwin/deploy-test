@@ -1,4 +1,3 @@
-#test
 name: Deploy
 run-name: Decidio ${{ inputs.decidio }}
 on:
