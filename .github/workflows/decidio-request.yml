@@ -2,6 +2,10 @@ name: Ask Decidio to deploy
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - .github/workflows/decidio-request.yml
+      - .github/workflows/deploy.yml
+  workflow_dispatch:
 permissions:
   id-token: write
   contents: read
@@ -9,7 +13,7 @@ jobs:
   ask:
     runs-on: ubuntu-latest
     steps:
-      - uses: OmniTwin/decidio-actions@e40ba8e75a223f2475038d38a16df5a5885afde4 # v1.0.0
+      - uses: OmniTwin/decidio-actions@c4506075600edef9576db821c4de756c300c15fe # v1.0.1
         with:
           step: request
           environment: production
