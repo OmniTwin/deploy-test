@@ -1,11 +1,14 @@
 name: Deploy
-run-name: Decidio ${{ inputs.decidio }}
+run-name: ${{ inputs.title || format('Decidio {0}', inputs.decidio) }}
 on:
   workflow_dispatch:
     inputs:
       decidio:
         description: Set by Decidio
         required: true
+      title:
+        description: Set by Decidio (the run's name - its record, environment and commit)
+        required: false
 permissions:
   id-token: write
   contents: read
@@ -15,7 +18,7 @@ jobs:
     environment: production
     steps:
       - id: decidio
-        uses: OmniTwin/decidio-actions@e40ba8e75a223f2475038d38a16df5a5885afde4 # v1.0.0
+        uses: OmniTwin/decidio-actions@c4506075600edef9576db821c4de756c300c15fe # v1.0.1
         with:
           step: verify
           decision: ${{ inputs.decidio }}
