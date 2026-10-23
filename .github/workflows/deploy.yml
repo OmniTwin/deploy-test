@@ -18,7 +18,7 @@ jobs:
     environment: production
     steps:
       - id: decidio
-        uses: OmniTwin/decidio-actions@c4506075600edef9576db821c4de756c300c15fe # v1.0.1
+        uses: OmniTwin/decidio-actions@1fee85aead22b3d47f545153a8b1b42efccf2e35 # v1.1.0
         with:
           step: verify
           decision: ${{ inputs.decidio }}
