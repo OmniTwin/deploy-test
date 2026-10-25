@@ -10,7 +10,26 @@ permissions:
   id-token: write
   contents: read
 jobs:
-  ask:
+  ask_production:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: OmniTwin/decidio-actions@f0b43fcb8f8ac5e15d9ad43679e333ffa7038ae2 # v1.3.1
+        with:
+          step: request
+          environment: production
+          api-url: https://mcp.decidioai.com
+  ask_staging:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: OmniTwin/decidio-actions@f0b43fcb8f8ac5e15d9ad43679e333ffa7038ae2 # v1.3.1
+        with:
+          step: request
+          environment: staging
+          api-url: https://mcp.decidioai.com
+  check:
+    if: ${{ github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     steps:
       - uses: OmniTwin/decidio-actions@f0b43fcb8f8ac5e15d9ad43679e333ffa7038ae2 # v1.3.1
