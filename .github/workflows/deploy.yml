@@ -9,13 +9,16 @@ on:
       title:
         description: Set by Decidio (the run's name - its record, environment and commit)
         required: false
+      environment:
+        description: Set by Decidio (production, staging)
+        required: true
 permissions:
   id-token: write
   contents: read
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: production
+    environment: ${{ inputs.environment }}
     steps:
       - id: decidio
         uses: OmniTwin/decidio-actions@f0b43fcb8f8ac5e15d9ad43679e333ffa7038ae2 # v1.3.1
