@@ -18,7 +18,7 @@ jobs:
         with:
           step: request
           environment: production
-          api-url: https://mcp.decidioai.com
+          api-url: https://mcp-staging.decidioai.com
   ask_staging:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
@@ -27,7 +27,7 @@ jobs:
         with:
           step: request
           environment: staging
-          api-url: https://mcp.decidioai.com
+          api-url: https://mcp-staging.decidioai.com
   check:
     if: ${{ github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
@@ -36,4 +36,4 @@ jobs:
         with:
           step: request
           environment: production
-          api-url: https://mcp.decidioai.com
+          api-url: https://mcp-staging.decidioai.com
