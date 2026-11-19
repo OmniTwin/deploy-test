@@ -19,7 +19,7 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: production
+    environment: staging
     steps:
       - name: "T-E5 - make staging unreachable"
         if: ${{ inputs.simulate_outage }}
