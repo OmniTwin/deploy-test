@@ -2,3 +2,4 @@ t0 push 1
 t0 push 2
 t0 push 3
 t0 push 5 before
+t0 push 6
