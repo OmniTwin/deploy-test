@@ -1,2 +1,3 @@
 t0 push 1
 t0 push 2
+t0 push 3
