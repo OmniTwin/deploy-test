@@ -6,6 +6,14 @@ on:
       decidio:
         description: "For the test, type emergency: and why"
         required: true
+      environment:
+        description: Set by Decidio (the approved environment)
+        type: choice
+        options:
+          - staging
+          - production
+        default: staging
+        required: true
       title:
         description: Set by Decidio
         required: false
@@ -19,7 +27,7 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: staging
+    environment: ${{ inputs.environment }}
     steps:
       - name: "T-E5 - make staging unreachable"
         if: ${{ inputs.simulate_outage }}
