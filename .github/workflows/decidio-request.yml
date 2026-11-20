@@ -13,7 +13,7 @@ jobs:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: OmniTwin/decidio-actions@f0b43fcb8f8ac5e15d9ad43679e333ffa7038ae2 # v1.3.1
+      - uses: OmniTwin/decidio-actions@069bfe2c63ded6abe503fc998ee0cac3b7f82269 # v1.4.0
         with:
           step: request
           environment: production
@@ -22,7 +22,7 @@ jobs:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: OmniTwin/decidio-actions@f0b43fcb8f8ac5e15d9ad43679e333ffa7038ae2 # v1.3.1
+      - uses: OmniTwin/decidio-actions@069bfe2c63ded6abe503fc998ee0cac3b7f82269 # v1.4.0
         with:
           step: request
           environment: staging
@@ -31,7 +31,7 @@ jobs:
     if: ${{ github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: OmniTwin/decidio-actions@f0b43fcb8f8ac5e15d9ad43679e333ffa7038ae2 # v1.3.1
+      - uses: OmniTwin/decidio-actions@069bfe2c63ded6abe503fc998ee0cac3b7f82269 # v1.4.0
         with:
           step: request
           environment: production
