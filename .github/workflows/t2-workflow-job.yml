@@ -1,0 +1,30 @@
+name: T2 workflow job probe
+
+on:
+  push:
+    branches:
+      - codex/t2-workflow-job
+
+permissions: {}
+
+jobs:
+  tracked:
+    name: T2 tracked
+    runs-on: ubuntu-latest
+    environment: t2-webhook-probe
+    steps:
+      - name: Fail once in the retry test
+        if: github.run_attempt == '1' && contains(github.event.head_commit.message, '[t2-retry]')
+        run: exit 1
+      - name: Finish the probe
+        run: echo "Tracked job finished"
+
+  untracked:
+    name: T2 untracked
+    runs-on: ubuntu-latest
+    environment:
+      name: t2-webhook-probe
+      deployment: false
+    steps:
+      - name: Finish the probe
+        run: echo "Untracked job finished"
