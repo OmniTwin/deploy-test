@@ -4,23 +4,14 @@ on:
   workflow_dispatch:
     inputs:
       decidio:
-        description: "For the test, type emergency: and why"
-        required: true
-      environment:
-        description: Set by Decidio (the approved environment)
-        type: choice
-        options:
-          - staging
-          - production
-        default: staging
+        description: Set by Decidio
         required: true
       title:
-        description: Set by Decidio
+        description: Set by Decidio (the run's name - its record, environment and commit)
         required: false
-      simulate_outage:
-        description: "T-E5 only - make staging unreachable from this run"
-        type: boolean
-        default: false
+      environment:
+        description: Set by Decidio (production, staging)
+        required: true
 permissions:
   id-token: write
   contents: read
@@ -29,11 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     steps:
-      - name: "T-E5 - make staging unreachable"
-        if: ${{ inputs.simulate_outage }}
-        run: echo "0.0.0.0 mcp-staging.decidioai.com" | sudo tee -a /etc/hosts
       - id: decidio
-        uses: OmniTwin/decidio-actions@t-e5-staging-test
+        uses: OmniTwin/decidio-actions@069bfe2c63ded6abe503fc998ee0cac3b7f82269 # v1.4.0
         with:
           step: verify
           decision: ${{ inputs.decidio }}
@@ -42,4 +30,4 @@ jobs:
         with:
           ref: ${{ steps.decidio.outputs.sha }}
       - name: Deploy
-        run: echo "T-E5 - the deploy would run here"
+        run: echo "Deploying ${{ steps.decidio.outputs.sha }} - replace this line with your deploy command"
